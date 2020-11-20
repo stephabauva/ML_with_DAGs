@@ -9,6 +9,7 @@ dagster = "*"
 dagit = "*"
 pytest = "*"
 pandas = "*"
+scikit-learn = "*"
 
 [dev-packages]
 

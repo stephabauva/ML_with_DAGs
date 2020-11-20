@@ -1,8 +1,10 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2513
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 AndaleMono;
-}
-{\colortbl;\red255\green255\blue255;\red47\green255\blue18;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\cssrgb\c15686\c99608\c7843;\csgray\c0\c90000;}
+\f3\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red47\green255\blue18;\red0\green0\blue0;\red251\green2\blue7;
+\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c15686\c99608\c7843;\csgray\c0\c90000;\cssrgb\c100000\c14913\c0;
+\cssrgb\c0\c0\c0;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -13,7 +15,7 @@ Clone GitHub repo  in local dagraytorcker\
 #create environment with pipenv from https://docs.python-guide.org/dev/virtualenvs/\
 pip3 install pipenv #manages dependencies on a per-project basis\
 #to enable pipenv in the shell\
-python3 -m site --user-base (\'97> /Users/urdoom/Library/Python/3.9 + /bin)\
+python3 -m site --user-base (\'97> /Users/urdoom/Library/Python/3.9 + /bin)activate\
 Add 
 \f1\b export PATH="$PATH:/Users/urdoom/Library/Python/3.9/bin
 \f0\b0 " to 
@@ -36,7 +38,40 @@ cd dagraytorcker\
 \f0 \cf0 \cb1 \CocoaLigature1 \
 ($ 
 \f1\b deactivate
-\f0\b0  , to exit the pipenv environment)\
+\f0\b0  , to exit the pipenv environment, you also need to restart the terminal before re-launching \'91pipenv shell\'92)\
 \
 #to commit and push on GitHub\
-Right-clic dagraytorcker folder \'97> Git commit \'97> push}
+Right-clic dagraytorcker folder \'97> Git commit \'97> push\
+\
+#adding config to dagit\
+Python3 -m dagit script.py \'97> go to Playground\
+Drag and drop the config.yaml or ever config manually\
+At the bottom right \'97> clic on Launch Execution\
+On the left margin, under pipelines & Solids \'97> select a pipeline\
+Then clic the \'91reload\'92 icon under \'91repository\'92\
+NOTE: a solid only take one argument, besides \'91context\'92, adding a second one, e.g. arg2 in \'85\
+\'85(context, arg1, arg2) willl result in a error in Dagit, it will ask to add a configuration \
+\
+#getting details on runs\
+Go to Runs and clic on an id, e.g. 638ea92d\
+At the top you can the time that a solid took to complete\
+Clicking on one of them will display all its process\
+At the first row, under 
+\f1\b INFO
+\f0\b0 , clic on \'91step_logs\'92 to get info on each step of the solid\
+\
+#option1/ dagit \'97> adding config
+\f1\b \cf4 .py
+\f0\b0 \cf0  file to dagit and call dagit\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 python3 -m 
+\f3 \cf5 \expnd0\expndtw0\kerning0
+dagit -f config.py
+\f0 \cf0 \kerning1\expnd0\expndtw0  #otherwise error: Missing required config entry "solids" at the root.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 python3 -m 
+\f3 \cf5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 dagit -f script.py\
+#option2/ dagster\
+dagster pipeline execute -f config.py -c config_env.yaml\
+}
