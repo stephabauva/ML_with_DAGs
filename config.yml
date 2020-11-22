@@ -1,5 +1,5 @@
 solids:
-  open_csv:
+  create_dataframe:
     inputs:
       csv_path:
         value: "data/raw/comments_train.csv"
