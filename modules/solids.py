@@ -27,7 +27,7 @@ def create_dataframe(context, csv_path:str):
     return df
 
 @solid
-def label_data(context, df):
+def encode_label(context, df):
     #function to encode the sentiment into 0 or 1
     def encode(sentiment):
         if sentiment == 'Positive':
@@ -36,10 +36,6 @@ def label_data(context, df):
             return 0
     df['label'] = df['sentiment'].map(encode)
     logging.debug(f"\n{df.label.value_counts()}")
-    return df
-
-@solid
-def get_y_encoded(context,df):
     y = df['label']
     return y
 

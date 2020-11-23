@@ -17,8 +17,8 @@ from sklearn.linear_model import LogisticRegression
 @pipeline
 def data_pipeline():
     # train_test_split(vectorize_text(get_xy(label_data(create_dataframe(open_csv())))))
-    df = label_data(create_dataframe())
-    training_data, testing_data = split_data(vectorize_text(df),get_y_encoded(df))
+    df = create_dataframe()
+    training_data, testing_data = split_data(vectorize_text(df),encode_label(df))
     #for rf
     grid1 = prepare_grid.alias('prepare_grid_random_forest')
     # unoptimized_model1 = RandomForestClassifier(random_state=30)
