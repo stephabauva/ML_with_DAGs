@@ -19,9 +19,16 @@ def data_pipeline():
     # train_test_split(vectorize_text(get_xy(label_data(create_dataframe(open_csv())))))
     df = label_data(create_dataframe())
     train_test_data = split_data(vectorize_text(df),get_y_encoded(df))
-    grid1 = prepare_grid_search()
+    #for rf
+    grid1 = prepare_grid_search.alias('grid_search_random_forest')
+    # unoptimized_model1 = RandomForestClassifier(random_state=30)
+    # model1 = grid1('rf')
+    #for log reg
+    grid2 = prepare_grid_search.alias('grid_search_logistic_regression')
+    # model2 = grid2('reg')
     # process_model1 = process_model.alias('process_random_forest')
-    process_model(train_test_data,grid1)
+    process_model(train_test_data,grid1())
+    process_model(train_test_data,grid2())
 
 # @pipeline
 # def train_evaluate_pipeline(train_test_data):

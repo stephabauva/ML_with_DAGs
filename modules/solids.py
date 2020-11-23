@@ -64,8 +64,11 @@ def split_data(context, X,y):
     return train_test_data
 
 @solid
-def prepare_grid_search(context, param_grid):
-    unoptimized_model = RandomForestClassifier(random_state=30)
+def prepare_grid_search(context, key, param_grid):
+    if key == 'rf':
+        unoptimized_model = RandomForestClassifier(random_state=30)
+    elif key == 'reg':
+        unoptimized_model = LogisticRegression(random_state=31)
     model = GridSearchCV(unoptimized_model, param_grid) #param_grid=grid2, cv= 5
     return model
 

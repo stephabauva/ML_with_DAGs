@@ -5,15 +5,17 @@ solids:
         value: "data/raw/comments_train.csv"
   grid_search_random_forest:
     inputs:
+      key:
+        value: 'rf'
       param_grid:
-        value: {'n_estimators': [5, 10,20],
-                'max_features': ['auto', 'sqrt', 'log2'],
-                'max_depth' : [4,5,6,7,8],
-                'criterion' :['gini', 'entropy']}
+        value: {"n_estimators": [5, 10],
+                "max_features": ["auto"],
+                "max_depth" : [1,2]}
   grid_search_logistic_regression:
     inputs:
+      key:
+        value: 'reg'
       param_grid:
-        value: {"C":np.logspace(-3,3,7), 
-                "penalty":["l2", "elasticnet", "none"],
+        value: {"penalty":["l2", "elasticnet", "none"],
                 "class_weight": ["balanced", "None"]}
 
