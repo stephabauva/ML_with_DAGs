@@ -81,13 +81,20 @@ Create a folder named pytest\
 Add context.py, script_test.py, config_dagit.py\
 In script_test.py, add -> from context import script and from script import *\
 Clic on the Test icon on the left sidebar and you can run your tests under the PYTHON section\
-Test_Explorer fail -> error ROOT DIR: within the project folder, open .vscode -> settings.json and add \'93python.testing.pytestArgs": ["./pytest\'94] #pytwat being the name of the test folder\
+Test_Explorer fail -> error ROOT DIR: within the project folder, open .vscode -> settings.json and add \'93python.testing.pytestArgs": ["./pytest\'94] #pytest being the name of the test folder\
 \
 Note: \
 -the section TEST EXPLORER can be used if you install the package \'93Python Test Explorer for Visual Studio Code\'94\
 -with this package you can have test features directly embedded into the test file, i.e. \
 \'97> \'93Run Test | Debug Test | Run | Debug | Show in Test Explorer <\'97\
 -You can directly run and debug tests by clicking on one of these features inside the test file\
+-If they don\'92t show up, clic the reload icon in Test->TEST EXPLORER, they should appear in the test file now.\
+\
+#nice extensions to have\
+\'93arepl\'94 is an extension that automatically checks your code in the background and displays it without you having to execute your script in the terminal or press Run.\
+Clic the little red cat icon at the top of vscode to launch arepl.\
+-by default, it will check after a delay specified in the AREPL.delay setting but if you want it to check just when you save, you can change the setting "AREPL.whenToExecute" to \'93onSave\'94 instead of \
+\'93afterDelay\'94.\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f3 \cf4 \expnd0\expndtw0\kerning0

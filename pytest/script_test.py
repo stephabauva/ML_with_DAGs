@@ -12,15 +12,12 @@ from script import *
 
 
 if __name__ == "__main__":
+    #unittest relative to Dagster
+    #not necessary for pytest
     result = execute_pipeline(my_pipeline)
     assert result.success
 
-# run_config = {
-#     "solids": {
-#         "open_csv": {"inputs": {"csv_path": {"value": "data/raw/comments_train.csv"}}}
-#     }
-# }
-
+### pytest ###
 def test_create_dataframe():
     res = execute_solid(create_dataframe,run_config=config_create_dataframe)
     assert res.success
