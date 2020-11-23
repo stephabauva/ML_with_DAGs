@@ -1,5 +1,5 @@
 from dagster import execute_pipeline, execute_solid
-from config_dagit import *
+from config_dagit import * #where you'll find config_create_dataframe and config_label_data
 
 import sys
 import logging
@@ -8,13 +8,14 @@ logging.basicConfig(level=logging.DEBUG)
 logging.debug(sys.path)
 from context import script
 from script import *
+logging.info(sys.path)
 
 
 
 if __name__ == "__main__":
     #unittest relative to Dagster
-    #not necessary for pytest
-    result = execute_pipeline(my_pipeline)
+    #not necessary for pytestŸ
+    result = execute_pipeline(data_pipeline)
     assert result.success
 
 ### pytest ###

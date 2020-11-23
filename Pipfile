@@ -10,6 +10,8 @@ dagit = "*"
 pytest = "*"
 pandas = "*"
 scikit-learn = "*"
+yellowbrick = "*"
+ipykernel = "*"
 
 [dev-packages]
 

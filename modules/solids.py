@@ -13,7 +13,7 @@ import joblib
 import sys
 
 #go one folder above and add the path to sys where /models is, to save the trained model
-os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+# os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -57,15 +57,15 @@ def split_data(context, X,y):
     # logging.debug(f"\nx_train, y_train: {}, {},\nx_test, y_test: {}, {}".format(len(x_train), len(y_train), len(x_test), len(y_test)))
     # logging.debug(f"\nx_train, y_train: %d, %d,\nx_test, y_test: %d, %d" % (len(x_train), len(y_train), len(x_test), len(y_test)))
     train_test_data = [x_train, y_train, x_test, y_test]
+    joblib.dump([x_train, y_train],'data/processed/training_data.pkl')
+    joblib.dump([x_test, y_test],'data/processed/testing_data.pkl')
+    logging.debug('training and tstign data saved in /data/processed')
     logging.debug(train_test_data)
     return train_test_data
 
 @solid
 def prepare_grid_search(context, param_grid):
     unoptimized_model = RandomForestClassifier(random_state=30)
-    # param_grid = {'n_estimators': [5, 10],
-    #                   'max_features': ['auto'],
-    #                   'max_depth' : [1,2]}
     model = GridSearchCV(unoptimized_model, param_grid) #param_grid=grid2, cv= 5
     return model
 
@@ -76,10 +76,9 @@ def train_model(context,train_test_data,model):
     logging.debug(x_train,y_train)
     trained_model = model.fit(x_train, y_train)
     #save model
-    print(sys.path)
+    logging.debug(f"sys.path: \n{sys.path}")
     joblib.dump(trained_model, 'models/'+ str(model.estimator.__str__).split(' ')[3]+ '.pkl')
     return trained_model
-
 
 @solid
 def evaluate_model(context, trained_model,train_test_data):
