@@ -9,7 +9,11 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
+import joblib
+import sys
 
+#go one folder above and add the path to sys where /models is, to save the trained model
+os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -71,6 +75,9 @@ def train_model(context,train_test_data,model):
     y_train = train_test_data[1]
     logging.debug(x_train,y_train)
     trained_model = model.fit(x_train, y_train)
+    #save model
+    print(sys.path)
+    joblib.dump(trained_model, 'models/'+ str(model.estimator.__str__).split(' ')[3]+ '.pkl')
     return trained_model
 
 
