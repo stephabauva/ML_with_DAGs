@@ -16,6 +16,6 @@ solids:
       key:
         value: 'reg'
       param_grid:
-        value: {"penalty":["l2", "elasticnet", "none"],
+        value: {"penalty":["l2", "none"],
                 "class_weight": ["balanced", "None"]}
 

@@ -1,4 +1,4 @@
-from dagster import execute_pipeline, pipeline, solid, composite_solid
+from dagster import execute_pipeline, pipeline, solid, composite_solid, OutputDefinition, Output, Any
 import os 
 import yaml
 import pandas as pd
@@ -50,46 +50,69 @@ def vectorize_text(context, df):
     return X
 
 ##### Training and evaluation #####
-@solid
+@solid(
+    output_defs=[
+        OutputDefinition(name='train', dagster_type=Any, is_required=True),
+        OutputDefinition(name='test', dagster_type=Any, is_required=True),
+    ],
+)
 def split_data(context, X,y):
     x_train, x_test, y_train, y_test = train_test_split(X,y, test_size=0.20)
-    # logging.debug(f"\nx_train, y_train: {len(x_train)}, {len(y_train)},\nx_test, y_test: {len(x_test)}, {len(y_test)}")
-    # logging.debug(f"\nx_train, y_train: {}, {},\nx_test, y_test: {}, {}".format(len(x_train), len(y_train), len(x_test), len(y_test)))
-    # logging.debug(f"\nx_train, y_train: %d, %d,\nx_test, y_test: %d, %d" % (len(x_train), len(y_train), len(x_test), len(y_test)))
-    train_test_data = [x_train, y_train, x_test, y_test]
-    joblib.dump([x_train, y_train],'data/processed/training_data.pkl')
-    joblib.dump([x_test, y_test],'data/processed/testing_data.pkl')
-    logging.debug('training and tstign data saved in /data/processed')
-    logging.debug(train_test_data)
-    return train_test_data
+    # train_test_data = [x_train, y_train, x_test, y_test]
+    training_data = [x_train, y_train]
+    testing_data = [x_test, y_test]
+    joblib.dump(training_data,'data/processed/training_data.pkl')
+    joblib.dump(testing_data,'data/processed/testing_data.pkl')
+    logging.debug('training and testing data saved in /data/processed')
+    # logging.debug(train_test_data)
+    yield Output(training_data, 'train')
+    yield Output(testing_data, 'test') 
 
 @solid
-def prepare_grid_search(context, key, param_grid):
-    if key == 'rf':
-        unoptimized_model = RandomForestClassifier(random_state=30)
-    elif key == 'reg':
-        unoptimized_model = LogisticRegression(random_state=31)
-    model = GridSearchCV(unoptimized_model, param_grid) #param_grid=grid2, cv= 5
+def prepare_grid(context, key, param_grid):
+    # If you want to use a switch pattern design instead of making the paramameter string callable:
+    # models = {'rf': RandomForestClassifier(random_state=30),
+    #         'reg': LogisticRegression(random_state=31)}
+    # if key == 'RandomForestClassifier':
+    #     unoptimized_model = models['RandomForestClassifier']
+    # elif key == 'LogisticRegression':
+    #     unoptimized_model = models['LogisticRegression']
+
+    #make a string callable
+    unoptimized_model = eval(key)() 
+    grid = GridSearchCV(unoptimized_model, param_grid)
+    return grid
+    
+@solid
+def get_best_estimator(context,training_data, grid):
+    logging.debug("grid:",grid)
+    x_train = training_data[0]
+    y_train = training_data[1]
+    logging.debug(x_train,y_train)
+    #fit the data to the grid and search for best parameters
+    search = grid.fit(x_train, y_train)
+    #apply best parameters to the base model
+    model = search.estimator
     return model
 
 @solid
-def train_model(context,train_test_data,model):
-    x_train = train_test_data[0]
-    y_train = train_test_data[1]
-    logging.debug(x_train,y_train)
+def train_model(context, training_data, model):
+    x_train = training_data[0]
+    y_train = training_data[1]
+    #fit model to data
     trained_model = model.fit(x_train, y_train)
     #save model
-    logging.debug(f"sys.path: \n{sys.path}")
-    joblib.dump(trained_model, 'models/'+ str(model.estimator.__str__).split(' ')[3]+ '.pkl')
+    joblib.dump(trained_model, 'models/'+ str(trained_model.__eq__).split(' ')[3]+ '.pkl')
+    logging.debug("model saved in /models")
     return trained_model
 
 @solid
-def evaluate_model(context, trained_model,train_test_data):
-    x_test = train_test_data[2]
-    y_test = train_test_data[3]
+def evaluate_model(context, testing_data, trained_model):
+    x_test = testing_data[0]
+    y_test = testing_data[1]
     y_pred = trained_model.predict(x_test)
     logging.info(f"\n{classification_report(y_test, y_pred)}")
 
 @composite_solid
-def process_model(train_test_data, model):
-    return evaluate_model(train_model(train_test_data, model),train_test_data)
+def process_model(training_data, testing_data, prep_grid):
+    return evaluate_model(testing_data, train_model(training_data, get_best_estimator(training_data, prep_grid)))
