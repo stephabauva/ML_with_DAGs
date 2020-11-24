@@ -81,12 +81,13 @@ def prepare_grid(context, key, param_grid):
     
 @solid
 def get_best_estimator(context,training_data, grid):
-    logging.debug("grid:",grid)
+    logging.info(f"grid:\n{grid}")
     x_train = training_data[0]
     y_train = training_data[1]
-    logging.debug(x_train,y_train)
+    logging.info([x_train, y_train]) #logging.debug(x_train,y_train) generates TypeError: not all arguments converted during string formatting
     #fit the data to the grid and search for best parameters
     search = grid.fit(x_train, y_train)
+    logging.info(f"best params:\n{search.best_params_}")
     #apply best parameters to the base model
     model = search.estimator
     return model
@@ -107,7 +108,7 @@ def evaluate_model(context, testing_data, trained_model):
     x_test = testing_data[0]
     y_test = testing_data[1]
     y_pred = trained_model.predict(x_test)
-    logging.info(f"\n{classification_report(y_test, y_pred)}")
+    logging.info(f"\n{trained_model}:\n{classification_report(y_test, y_pred)}")
 
 @composite_solid
 def process_model(training_data, testing_data, prep_grid):

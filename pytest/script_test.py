@@ -3,13 +3,11 @@ from config_dagit import * #where you'll find config_create_dataframe and config
 
 import sys
 import logging
-
 logging.basicConfig(level=logging.DEBUG)
 logging.debug(sys.path)
+
 from context import script
 from script import *
-logging.info(sys.path)
-
 
 
 if __name__ == "__main__":
