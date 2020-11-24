@@ -22,5 +22,5 @@ def test_create_dataframe():
     assert res.success
 
 def test_label_data():
-    res = execute_solid(label_data, run_config=config_label_data)
+    res = execute_solid(encode_label, run_config=config_label_data)
     assert res.success

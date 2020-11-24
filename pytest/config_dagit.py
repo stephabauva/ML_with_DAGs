@@ -19,7 +19,7 @@ df = pd.DataFrame(data, columns=col)
 
 config_label_data = {
     "solids": {
-        "label_data":{
+        "encode_label":{
             "inputs":{
                 "df":{"value": df}
             }

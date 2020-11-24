@@ -42,7 +42,9 @@ def encode_label(context, df):
 @solid
 def vectorize_text(context, df):
     x = df['comment']
+    vectorizer = CountVectorizer()
     X = CountVectorizer().fit_transform(x).todense()
+    joblib.dump(vectorizer,'tmp/vectorizer.pkl')
     return X
 
 ##### Training and evaluation #####
@@ -84,12 +86,12 @@ def get_best_estimator(context,training_data, grid):
     logging.info(f"grid:\n{grid}")
     x_train = training_data[0]
     y_train = training_data[1]
-    logging.info([x_train, y_train]) #logging.debug(x_train,y_train) generates TypeError: not all arguments converted during string formatting
+    logging.debug([x_train, y_train]) #seems that logging.* only takes one argyment, otherwise raises TypeError: not all arguments converted during string formatting
     #fit the data to the grid and search for best parameters
     search = grid.fit(x_train, y_train)
     logging.info(f"best params:\n{search.best_params_}")
     #apply best parameters to the base model
-    model = search.estimator
+    model = search.best_estimator_
     return model
 
 @solid
