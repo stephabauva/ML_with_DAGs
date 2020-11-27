@@ -12,6 +12,7 @@ from sklearn.metrics import classification_report
 import joblib
 import sys
 
+
 #go one folder above and add the path to sys where /models is, to save the trained model
 # os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
