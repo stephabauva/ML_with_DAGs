@@ -23,20 +23,21 @@ Step 2. Create a virtual environment 👾 (Optional)
 python3 -m virtualenv venv
 source venv/bin/activate
 ```
-Step 3. Install dependencies 
+Step 3. Install dependencies 🧞‍♂️
 ```
 pip install -r requirements.txt
 ```
-Step 4. Launch Dagster's UI 
+Step 4. Launch Dagster's UI 🐙
 ```
 python3 -m dagit -f script.py
 ```
-Step 5. On the main page, at the top, click on Playground. 
+Step 5. On the main page, at the top, click on Playground.
+
 ![alt text](https://github.com/stephanBV/ML_with_DAGs/blob/main/img/playground.png)
 
 Then, drag-and-drop the config.yml of the cloned repository to the Playground page.
 
-Step 6. Click on Launch Execution at the bottom right of the Playground page.
+Step 6. Click on Launch Execution at the bottom right of the Playground page.⚡️
 
 Reminder:
 For a guided tour of the UI with our application, you can head to a pretty article on Hackernoon: 
