@@ -9,6 +9,7 @@ from sklearn.linear_model import LogisticRegression
 def data_pipeline():
     df = create_dataframe()
     training_data, testing_data = split_data(vectorize_text(df),encode_label(df))
+    #The parts below could eventually be a second pipeline. if so, just comment the rest of this function, i.e. from line 14 to line 19. 
     #for rf
     grid1 = prepare_grid.alias('prepare_grid_random_forest')
     #for log reg
