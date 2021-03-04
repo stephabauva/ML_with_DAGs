@@ -70,15 +70,15 @@ def split_data(context, X,y):
 @solid
 def prepare_grid(context, key, param_grid):
     # If you want to use a switch pattern design instead of making the paramameter string callable:
-    # models = {'rf': RandomForestClassifier(random_state=30),
-    #         'reg': LogisticRegression(random_state=31)}
-    # if key == 'RandomForestClassifier':
-    #     unoptimized_model = models['RandomForestClassifier']
-    # elif key == 'LogisticRegression':
-    #     unoptimized_model = models['LogisticRegression']
+    models = {'rf': RandomForestClassifier(random_state=30),
+            'reg': LogisticRegression(random_state=31)}
+    if key == 'RandomForestClassifier':
+        unoptimized_model = models['rf']
+    elif key == 'LogisticRegression':
+        unoptimized_model = models['reg']
+    #make tke 'key' callable
+#     unoptimized_model = eval(key)() 
 
-    #make a string callable
-    unoptimized_model = eval(key)() 
     grid = GridSearchCV(unoptimized_model, param_grid)
     return grid
     
@@ -87,7 +87,7 @@ def get_best_estimator(context,training_data, grid):
     logging.info(f"grid:\n{grid}")
     x_train = training_data[0]
     y_train = training_data[1]
-    logging.debug([x_train, y_train]) #seems that logging.* only takes one argyment, otherwise raises TypeError: not all arguments converted during string formatting
+    logging.debug([x_train, y_train]) #logging.* only takes one argument, otherwise raises TypeError: not all arguments converted during string formatting
     #fit the data to the grid and search for best parameters
     search = grid.fit(x_train, y_train)
     logging.info(f"best params:\n{search.best_params_}")
