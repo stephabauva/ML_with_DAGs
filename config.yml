@@ -3,7 +3,7 @@ solids:
     inputs:
       csv_path:
         value: "data/raw/comments_train.csv"
-  grid_search_random_forest:
+  prepare_grid_random_forest:
     inputs:
       key:
         value: 'rf'
@@ -11,7 +11,7 @@ solids:
         value: {"n_estimators": [5, 10],
                 "max_features": ["auto"],
                 "max_depth" : [1,2]}
-  grid_search_logistic_regression:
+  prepare_grid_logistic_regression:
     inputs:
       key:
         value: 'reg'
