@@ -1,10 +1,11 @@
 # ML with DAGs  ❄️
-🙀 👉🏼 See a brief guided tour of Dagster and the DAG generated from this program at:
+This application is a simple text classifier using sklearn for newcomers to be introduced to Dagster.
+
+🙀 👉🏼 See a brief guided tour of Dagster and the DAG generated from this program at https://github.com/stephanBV/ML_with_DAGs/blob/main/pdf/quick_start_with_ML_and_Dagster.pdf \
+or from the repository ./pdf/quick_start_with_ML_and_Dagster.pdf
 
 Dagster is a data orchestrator for machine learning, analytics, and ETL.
 It lets you define pipelines in terms of the data flow between reusable, logical components, then test locally and run anywhere. With a unified view of pipelines and the assets they produce, Dagster can schedule and orchestrate Pandas, Spark, SQL, or anything else that Python can invoke. It makes testing easier and deploying faster 😎.
-
-This application is a simple text classifier using sklearn.
 
 - The script creates a single pipeline which:
 	- processes the data, 
@@ -44,6 +45,5 @@ Then, drag-and-drop the config.yml of the cloned repository to the Playground pa
 Step 6. Click on Launch Execution at the bottom right of the Playground page.⚡️
 
 Reminder:
-For a guided tour of the UI with our application, you can head to a pretty article on Hackernoon: 
-
-or check the pdf version in ./pdf/quick_start_with_ML_and_Dagster.pdf
+For a guided tour of the UI with our application, you can head to https://github.com/stephanBV/ML_with_DAGs/blob/main/pdf/quick_start_with_ML_and_Dagster.pdf
+or from the repository ./pdf/quick_start_with_ML_and_Dagster.pdf
