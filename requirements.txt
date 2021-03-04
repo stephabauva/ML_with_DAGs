@@ -4,10 +4,8 @@ dagit
 pytest
 pandas
 scikit-learn
-yellowbrick
 ipykernel
 
 #packages for ray
-ray
 pydantic
 uvicorn
