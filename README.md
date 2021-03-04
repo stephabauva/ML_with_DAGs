@@ -1,5 +1,5 @@
 # ML with DAGs  ❄️
-🙀 👉🏼 See a guided tour of Dagster and the DAG generated from this program at:
+🙀 👉🏼 See a brief guided tour of Dagster and the DAG generated from this program at:
 
 Dagster is a data orchestrator for machine learning, analytics, and ETL.
 It lets you define pipelines in terms of the data flow between reusable, logical components, then test locally and run anywhere. With a unified view of pipelines and the assets they produce, Dagster can schedule and orchestrate Pandas, Spark, SQL, or anything else that Python can invoke. It makes testing easier and deploying faster 😎.
@@ -10,8 +10,10 @@ This application is a simple text classifier using sklearn.
 	- processes the data, 
 	- searches for optimal parameters between a logistic regression and a random forest,
 	- train and test the model
-  
-![alt text](https://github.com/stephanBV/ML_with_DAGs/blob/main/img/dagster_pipeline_drawio.jpg)
+
+<p align="center">
+  <img src="https://github.com/stephanBV/ML_with_DAGs/blob/main/img/dagster_pipeline_drawio.jpg" />
+</p>
 
 Step 1. Clone this repository 👯‍♂️
 ```
@@ -33,7 +35,9 @@ python3 -m dagit -f script.py
 ```
 Step 5. On the main page, at the top, click on Playground.
 
-![alt text](https://github.com/stephanBV/ML_with_DAGs/blob/main/img/playground.png)
+<p align="center">
+  <img src="https://github.com/stephanBV/ML_with_DAGs/blob/main/img/playground.png" />
+</p>
 
 Then, drag-and-drop the config.yml of the cloned repository to the Playground page.
 
