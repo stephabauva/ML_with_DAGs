@@ -1,4 +1,6 @@
 # ML with DAGs  ❄️
+See a guided tour 🤩 of Dagster and the DAG generated 🤓 from this program at 🥳:
+
 Dagster is a data orchestrator for machine learning, analytics, and ETL.
 It lets you define pipelines in terms of the data flow between reusable, logical components, then test locally and run anywhere. With a unified view of pipelines and the assets they produce, Dagster can schedule and orchestrate Pandas, Spark, SQL, or anything else that Python can invoke. It makes testing easier and deploying faster 😎.
 
@@ -36,5 +38,7 @@ Then, drag-and-drop the config.yml of the cloned repository to the Playground pa
 
 Step 6. Click on Launch Execution at the bottom right of the Playground page.
 
+Reminder:
 For a guided tour of the UI with our application, you can head to a pretty article on Hackernoon: 
+
 or check the pdf version in ./pdf/quick_start_with_ML_and_Dagster.pdf
