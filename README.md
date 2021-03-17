@@ -44,6 +44,3 @@ Then, drag-and-drop the config.yml of the cloned repository to the Playground pa
 
 Step 6. Click on Launch Execution at the bottom right of the Playground page.⚡️
 
-Reminder:
-For a guided tour of the UI with our application, you can head to https://github.com/stephanBV/ML_with_DAGs/blob/main/pdf/quick_start_with_ML_and_Dagster.pdf
-or from the repository ./pdf/quick_start_with_ML_and_Dagster.pdf
