@@ -6,6 +6,4 @@ pandas
 scikit-learn
 ipykernel
 
-#packages for ray
-pydantic
-uvicorn
+
