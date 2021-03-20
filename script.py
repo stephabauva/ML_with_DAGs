@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 from dagster import execute_pipeline, pipeline, solid, repository
 from modules.solids import *
 from sklearn.ensemble import RandomForestClassifier
