@@ -1,3 +1,5 @@
+⚠️ DISCLAIMER: This project is not maintained. Its code and dependencies are outdated. To get started with Dagster follow this link: https://docs.dagster.io/tutorial/setup
+
 # ML with DAGs  ❄️
 This application is a simple text classifier using sklearn for newcomers to be introduced to Dagster. 
 
